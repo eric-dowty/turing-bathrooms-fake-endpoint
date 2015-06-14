@@ -1,4 +1,4 @@
-class Api::V1::BathroomController < ApplicationController
+class Api::V1::BathroomsController < ApplicationController
   respond_to :json
 
   def index
