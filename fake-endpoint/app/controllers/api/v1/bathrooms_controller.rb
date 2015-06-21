@@ -5,4 +5,9 @@ class Api::V1::BathroomsController < ApplicationController
     respond_with Bathroom.statuses
   end
 
+  def status
+    Bathroom.updates(params["status"])
+    respond_with Bathroom.statuses
+  end
+
 end

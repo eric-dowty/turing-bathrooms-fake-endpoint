@@ -1,15 +1,21 @@
-class Bathroom 
+require 'json'
+
+class Bathroom < ActiveRecord::Base
 
   def self.statuses
     { 
-      bathroom1: open?,
-      bathroom2: open?,
-      bathroom3: open?
+      bathroom1: Bathroom.find_by(description: "bathroom1").status,
+      bathroom2: Bathroom.find_by(description: "bathroom2").status,
+      bathroom3: Bathroom.find_by(description: "bathroom3").status
     }
   end
 
-  def self.open?
-    rand(0..1)
+  def self.updates(status)
+    current_status = JSON.parse(status) 
+    Bathroom.find_by(description: "bathroom1").update!(status: current_status["bathroomOne"])
+    Bathroom.find_by(description: "bathroom2").update!(status: current_status["bathroomTwo"])
+    Bathroom.find_by(description: "bathroom3").update!(status: current_status["bathroomThree"])
+    puts Bathroom.statuses
   end
 
 end
